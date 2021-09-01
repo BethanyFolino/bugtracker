@@ -10,13 +10,6 @@ from django import forms
 
 # Create your views here.
 @login_required
-def homepage(request):
-    # tickets = Ticket.objects.all() ?
-    # tickets need to be grouped by type
-    tickets = "Tickets"
-    return render(request, 'homepage.html', {'tickets': tickets})
-
-@login_required
 def add_user(request):
     if request.method == "POST":
         form = AddUserForm(request.POST)

@@ -1,1 +1,29 @@
-<!--All tickets displayed here, but in groups based on status-->
+{% include 'navbar.html' %}
+<hr>
+{% for ticket in tickets %}
+<h1>New Tickets</h1>
+{% if ticket.status == 'new' %}
+<a href='/ticket/{{ticket.id}}/'>Title:{{ticket.title}} Added by:{{MyUser.username}}</a>
+{% endif %}
+{% endfor %}
+<hr>
+{% for ticket in tickets %}
+<h1>Assigned Tickets</h1>
+{% if ticket.status == 'assigned_to' %}
+<a href='/ticket/{{ticket.id}}/'>Title:{{ticket.title}} Added by:{{MyUser.username}} Assigned to:{{}}</a>
+{% endif %}
+{% endfor %}
+<hr>
+{% for ticket in tickets %}
+<h1>Completed Tickets</h1>
+{% if ticket.status == 'completed_by' %}
+<a href='/ticket/{{ticket.id}}/'>Title:{{ticket.title}} Added by:{{MyUser.username}} Assigned to:{{}} Completed by:{{}}</a>
+{% endif %}
+{% endfor %}
+<hr>
+{% for ticket in tickets %}
+<h1>Invalid Tickets</h1>
+{% if ticket.status == 'invalid' %}
+<a href='/ticket/{{ticket.id}}/'>Title:{{ticket.title}} Added by:{{MyUser.username}} Invalidated by:{{MyUser.username}}</a>
+{% endif %}
+{% endfor %}
