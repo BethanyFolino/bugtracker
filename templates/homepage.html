@@ -1,29 +1,36 @@
 {% include 'navbar.html' %}
 <hr>
+<h2>New</h2>
 {% for ticket in tickets %}
-<h1>New Tickets</h1>
-{% if ticket.status == 'new' %}
-<a href='/ticket/{{ticket.id}}/'>Title:{{ticket.title}} Added by:{{MyUser.username}}</a>
+{% if ticket.status == 'New' %}
+Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
+Added by: <a href='/user/{{user.user_id}}/'>{{user.username}}</a>
 {% endif %}
 {% endfor %}
 <hr>
+<h2>In Progress</h2>
 {% for ticket in tickets %}
-<h1>Assigned Tickets</h1>
-{% if ticket.status == 'assigned_to' %}
-<a href='/ticket/{{ticket.id}}/'>Title:{{ticket.title}} Added by:{{MyUser.username}} Assigned to:{{}}</a>
+{% if ticket.status == 'In Progress' %}
+Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
+Added by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
+Assigned to: <a href='/user/{{user.id}}/'>{{user.username}}</a>
 {% endif %}
 {% endfor %}
 <hr>
+<h2>Done</h2>
 {% for ticket in tickets %}
-<h1>Completed Tickets</h1>
-{% if ticket.status == 'completed_by' %}
-<a href='/ticket/{{ticket.id}}/'>Title:{{ticket.title}} Added by:{{MyUser.username}} Assigned to:{{}} Completed by:{{}}</a>
+{% if ticket.status == 'Done' %}
+Title: <a href='/ticket/{{ticket.id}}/'> {{ticket.title}}</a>
+Added by: <a href='/user/{{user.id}}/'> {{user.username}}</a>
+Assigned to: <a href='/user/{{user.id}}/'>{{user.username}}</a>
+Completed by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
 {% endif %}
 {% endfor %}
 <hr>
+<h2>Invalid</h2>
 {% for ticket in tickets %}
-<h1>Invalid Tickets</h1>
-{% if ticket.status == 'invalid' %}
-<a href='/ticket/{{ticket.id}}/'>Title:{{ticket.title}} Added by:{{MyUser.username}} Invalidated by:{{MyUser.username}}</a>
+{% if ticket.status == 'Invalid' %}
+Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
+Added by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
 {% endif %}
 {% endfor %}

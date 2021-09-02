@@ -1,8 +1,9 @@
-{% include navbar.html %}
+{% include 'navbar.html' %}
+<hr>
 <h1>User</h1>
 <ul>
-    <h2><li>Username: {{MyUser.username}}</li></h2>
-    <h2><li>Created tickets: {{MyUser.created}}</li></h2>
-    <h2><li>Assigned tickets: {{MyUser.assigned}}</li></h2>
-    <h2><li>Completed tickets: {{MyUser.completed}}</li></h2>
+    <h2><li>Username: {{my_user.username}}</li></h2>
+    <h2><li>Created tickets: {{my_user.created}}</li></h2>
+    <h2><li>Assigned tickets: {{my_user.assigned}}</li></h2>
+    <h2><li>Completed tickets: {{my_user.completed}}</li></h2>
 </ul>

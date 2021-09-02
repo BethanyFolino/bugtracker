@@ -1,11 +1,16 @@
-{% include navbar.html %}
-<h1>Ticket</h1>
+{% include 'navbar.html' %}
+<hr>
+<h2>Ticket</h2>
+<button><a href='/ticket/{{ticket.id}}/edit/'>Edit Ticket</a></button>
+<button><a href='/ticket/{{ticket.id}}/assign/'>Assign Ticket</a></button>
+<button><a href='/ticket/{{ticket.id}}/finish/'>Mark as Finished</a></button>
+<button><a href='/ticket/{{ticket.id}}/invalid/'>Mark as Invalid</a></button>
 <ul>
-    <h2><li>Title: {{ticket.title}}</li></h2>
-    <h2><li>Date filed: {{ticket.date_filed}}</li></h2>
-    <h2><li>Description: {{ticket.description}}</li></h2>
-    <h2><li>Filed by: {{ticket.filed_by}}</li></h2>
-    <h2><li>Status: {{ticket.status}}</li></h2>
-    <h2><li>Assigned to: {{ticket.assigned_to}}</li></h2>
-    <h2><li>Completed by: {{ticket.completed_by}}</li></h2>
+    <h3><li>Title: {{ticket.title}}</li></h3>
+    <h3><li>Date filed: {{ticket.date_filed}}</li></h3>
+    <h3><li>Description: {{ticket.description}}</li></h3>
+    <h3><li>Filed by: {{ticket.filed_by}}</li></h3>
+    <h3><li>Status: {{ticket.status}}</li></h3>
+    <h3><li>Assigned to: {{ticket.assigned_to}}</li></h3>
+    <h3><li>Completed by: {{ticket.completed_by}}</li></h3>
 </ul>
