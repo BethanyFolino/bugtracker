@@ -1,9 +1,15 @@
 {% include 'navbar.html' %}
 <hr>
 <h2>{{ticket.title}}</h2>
+{% if ticket.filed_by == request.user %}
 <button><a href='/ticket/{{ticket.id}}/edit/'>Edit Ticket</a></button>
+{% endif %}
+{% if not ticket.assigned_to and not ticket.completed_by %}
 <button><a href='/ticket/{{ticket.id}}/assign/'>Assign Ticket</a></button>
-<button><a href='/ticket/{{ticket.id}}/finish/'>Mark as Finished</a></button>
+{% endif %}
+{% if ticket.assigned_to == request.user %}
+<button><a href='/ticket/{{ticket.id}}/complete/'>Mark as Completed</a></button>
+{% endif %}
 <button><a href='/ticket/{{ticket.id}}/invalid/'>Mark as Invalid</a></button>
 <ul>
     <h3><li>Date filed: {{ticket.date_filed}}</li></h3>

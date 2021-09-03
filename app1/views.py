@@ -9,7 +9,6 @@ from django.contrib.auth.models import AbstractUser
 from django import forms
 
 # Create your views here.
-@login_required
 def add_user(request):
     if request.method == "POST":
         form = AddUserForm(request.POST)

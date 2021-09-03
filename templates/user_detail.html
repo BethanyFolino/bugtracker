@@ -17,7 +17,7 @@
     {% endfor %}
     <br>
     Completed Tickets:
-    {% for ticket in ticket_finished %}
+    {% for ticket in ticket_completed %}
     {% if my_user == my_user %}
     <h4><a href='/ticket/{{ticket.id}}'>{{ticket.title}}</a></h4>
     {% endif %}

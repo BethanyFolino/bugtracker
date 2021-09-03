@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app1.views import login_view, logout_view, add_user
-from app2.views import homepage, user_detail, ticket_detail, add_ticket, edit_ticket, assign_ticket, finish_ticket, invalid_ticket
+from app2.views import homepage, user_detail, ticket_detail, add_ticket, edit_ticket, assign_ticket, complete_ticket, invalid_ticket
 
 urlpatterns = [
     path('user/<int:id>/', user_detail, name='userdetail'),
@@ -25,7 +25,7 @@ urlpatterns = [
     path('addticket/', add_ticket, name='addticket'),
     path('ticket/<int:id>/edit/', edit_ticket, name='editticket'),
     path('ticket/<int:id>/assign/', assign_ticket, name='assignticket'),
-    path('ticket/<int:id>/finish/', finish_ticket, name='finishticket'),
+    path('ticket/<int:id>/complete/', complete_ticket, name='completeticket'),
     path('ticket/<int:id>/invalid/', invalid_ticket, name='invalidticket'),
     path('', homepage, name='home'),
     path('admin/', admin.site.urls),

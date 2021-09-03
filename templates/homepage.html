@@ -4,7 +4,7 @@
 {% for ticket in tickets %}
 {% if ticket.status == 'New' %}
 Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
-Added by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
+Added by: <a href='/user/{{user.id}}/'>{{ticket.filed_by.username}}</a>
 <br>
 {% endif %}
 {% endfor %}
@@ -34,5 +34,6 @@ Completed by: <a href='/user/{{user.id}}/'>{{ticket.completed_by.username}}</a>
 {% if ticket.status == 'Invalid' %}
 Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
 Added by: <a href='/user/{{user.id}}/'>{{ticket.filed_by.username}}</a>
+<br>
 {% endif %}
 {% endfor %}
