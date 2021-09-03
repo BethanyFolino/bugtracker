@@ -1,3 +1,4 @@
+<body>
 {% if not user.is_authenticated %}
 <h1>👾 Welcome! Please log in to use Bug Tracker! 👾</h1>
 {% endif %}
@@ -12,3 +13,4 @@ Hi, <a href='/user/{{user.id}}/'>{{request.user.username}}</a>!
     <button><a href='/logout/'>Log Out</a></button>
 </nav>
 {% endif %}
+</body>

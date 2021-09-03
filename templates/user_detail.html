@@ -1,5 +1,6 @@
-{% include 'navbar.html' %}
+{% extends 'base.html' %} {% block content %}
 <hr>
+<body>
 <h1>{{my_user.username}}'s Profile</h1>
 <ul>
     Created Tickets:
@@ -23,3 +24,5 @@
     {% endif %}
     {% endfor %}
 </ul>
+</body>
+{% endblock %}

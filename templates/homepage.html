@@ -1,39 +1,65 @@
-{% include 'navbar.html' %}
+ {% extends 'base.html' %} {% block content %}
 <hr>
-<h2>New</h2>
+<link rel="stylesheet" href="/static/css/style.css">
+<body>
+<h4>New 🐛</h4>
 {% for ticket in tickets %}
 {% if ticket.status == 'New' %}
-Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
-Added by: <a href='/user/{{user.id}}/'>{{ticket.filed_by.username}}</a>
-<br>
+<div class='card text-dark bg-light mb-3' style='width: 22rem'>
+    <h6 class='card-header'>{{ticket.title}}</h6>
+    <div class='card-body'>
+        <h6 class='card-title'>Filed By: {{ticket.filed_by.username}}</h6>
+        <a class='btn btn-dark btn-sm' href='/ticket/{{ticket.id}}/'>Details</a>
+        <a class='btn btn-dark btn-sm' href='/user/{{user.id}}/'>{{ticket.filed_by.username}}'s Profile</a>
+    </div>
+</div>
 {% endif %}
 {% endfor %}
 <hr>
-<h2>In Progress</h2>
+<h4>In Progress 🐝</h4>
 {% for ticket in tickets %}
 {% if ticket.status == 'In Progress' %}
-Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
-Added by: <a href='/user/{{user.id}}/'>{{ticket.filed_by.username}}</a>
-Assigned to: <a href='/user/{{user.id}}/'>{{ticket.assigned_to.username}}</a>
-<br>
+<div class='card text-dark bg-warning mb-3' style='width: 22rem'>
+    <h6 class='card-header'>{{ticket.title}}</h6>
+    <div class='card-body'>
+        <h6 class='card-title'>Filed By: {{ticket.filed_by.username}}</h6>
+        <h6 class='card-title'>Assigned to: {{ticket.assigned_to.username}}</h6>
+        <a class='btn btn-dark btn-sm' href='/ticket/{{ticket.id}}/'>Details</a>
+        <a class='btn btn-dark btn-sm' href='/user/{{user.id}}/'>{{ticket.filed_by.username}}'s Profile</a>
+        <a class='btn btn-dark btn-sm' href='/user/{{user.id}}/'>{{ticket.assigned_to.username}}'s Profile</a>
+    </div>
+</div>
 {% endif %}
 {% endfor %}
 <hr>
-<h2>Done</h2>
+<h4>Done 🦋</h4>
 {% for ticket in tickets %}
 {% if ticket.status == 'Done' %}
-Title: <a href='/ticket/{{ticket.id}}/'> {{ticket.title}}</a>
-Added by: <a href='/user/{{user.id}}/'> {{ticket.filed_by.username}}</a>
-Completed by: <a href='/user/{{user.id}}/'>{{ticket.completed_by.username}}</a>
-<br>
+<div class='card text-white bg-success mb-3' style='width: 22rem'>
+    <h6 class='card-header'>{{ticket.title}}<h6>
+    <div class='card-body'>
+        <h6 class='card-title'>Filed by: {{ticket.filed_by.username}}</h6>
+        <h6 class='card-title'>Completed by: {{ticket.completed_by.username}}</h6>
+        <a class='btn btn-light btn-sm' href='/ticket/{{ticket.id}}/'>Details</a>
+        <a class='btn btn-light btn-sm' href='/user/{{user.id}}/'>{{ticket.filed_by.username}}'s Profile</a>
+        <a class='btn btn-light btn-sm' href='/user/{{user.id}}/'>{{ticket.completed_by.username}}'s Profile</a>
+    </div>
+</div>
 {% endif %}
 {% endfor %}
 <hr>
-<h2>Invalid</h2>
+<h4>Invalid 🪳</h4>
 {% for ticket in tickets %}
 {% if ticket.status == 'Invalid' %}
-Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
-Added by: <a href='/user/{{user.id}}/'>{{ticket.filed_by.username}}</a>
-<br>
+<div class='card text-white bg-danger mb-3' style='width: 22rem'>
+    <h6 class='card-header'>{{ticket.title}}</h6>
+    <div class='card-body'>
+        <h6 class='card-title'>Filed by: {{ticket.filed_by.username}}</h6>
+        <a class='btn btn-light btn-sm' href='/ticket/{{ticket.id}}/'>Details</a>
+        <a class='btn btn-light btn-sm' href='/user/{{user.id}}/'>{{ticket.filed_by.username}}'s Profile</a>
+    </div>
+</div>
 {% endif %}
 {% endfor %}
+</body>
+{% endblock %}

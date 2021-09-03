@@ -1,5 +1,6 @@
-{% include 'navbar.html' %}
+{% extends 'base.html' %} {% block content %}
 <hr>
+<body>
 <h2>{{ticket.title}}</h2>
 {% if ticket.filed_by == request.user %}
 <button><a href='/ticket/{{ticket.id}}/edit/'>Edit Ticket</a></button>
@@ -19,3 +20,5 @@
     <h3><li>Assigned to: {{ticket.assigned_to.username}}</li></h3>
     <h3><li>Completed by: {{ticket.completed_by.username}}</li></h3>
 </ul>
+</body>
+{% endblock %}
