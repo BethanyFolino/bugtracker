@@ -8,6 +8,7 @@ from bugtracker.settings import AUTH_USER_MODEL
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django import forms
+from django.contrib import messages
 
 # Create your views here.
 @login_required
@@ -36,6 +37,7 @@ def add_ticket(request):
                 filed_by=request.user,
                 description=data['description'],
             )
+            messages.success(request, 'Ticket successfully created!', extra_tags='success')
             return HttpResponseRedirect(reverse('home'))
     form = AddTicketForm()
     return render(request, 'generic_form.html', {'form': form})
@@ -50,6 +52,7 @@ def edit_ticket(request, id):
             item.title = data['title']
             item.description = data['description']
             item.save()
+            messages.success(request, 'Ticket successfully edited!', extra_tags='success')
             return HttpResponseRedirect(reverse('ticketdetail', args=(id,)))
 
     form = EditTicketForm(initial={
@@ -63,6 +66,7 @@ def assign_ticket(request, id):
     ticket.assigned_to = request.user
     ticket.status = 'In Progress'
     ticket.save()
+    messages.success(request, 'Ticket successfully assigned!', extra_tags='success')
     return HttpResponseRedirect(reverse('ticketdetail', args=(id,)))
 
 def complete_ticket(request, id):
@@ -71,6 +75,7 @@ def complete_ticket(request, id):
     ticket.status = 'Done'
     ticket.assigned_to = None
     ticket.save()
+    messages.success(request, 'Ticket successfully marked as completed!', extra_tags='success')
     return HttpResponseRedirect(reverse('ticketdetail', args=(id,)))
 
 def invalid_ticket(request, id):
@@ -79,5 +84,6 @@ def invalid_ticket(request, id):
     ticket.assigned_to = None
     ticket.completed_by = None
     ticket.save()
+    messages.success(request, 'Ticket successfully marked as invalid!', extra_tags='success')
     return HttpResponseRedirect(reverse('ticketdetail', args=(id,)))
 

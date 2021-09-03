@@ -1,26 +1,29 @@
 {% extends 'base.html' %} {% block content %}
 <hr>
+<link rel="stylesheet" href="/static/css/style.css">
 <body>
-<h1>{{my_user.username}}'s Profile</h1>
+<h2>{{my_user.username}}'s Profile</h2>
 <ul>
-    Created Tickets:
+    <h4>Created Tickets:</h4>
     {% for ticket in ticket_created %}
     {% if my_user == my_user %}
-    <h4><a href='/ticket/{{ticket.id}}'>{{ticket.title}}</a></h4>
+    <a class='btn btn-light btn-sm' href='/ticket/{{ticket.id}}'>{{ticket.title}}</a>
     {% endif %}
     {% endfor %}
     <br>
-    Assigned Tickets:
+    <hr>
+    <h4>Assigned Tickets:</h4>
     {% for ticket in ticket_assigned %}
     {% if my_user == my_user %}
-    <h4><a href='/ticket/{{ticket.id}}'>{{ticket.title}}</a></h4>
+    <a class='btn btn-warning btn-sm' href='/ticket/{{ticket.id}}'>{{ticket.title}}</a>
     {% endif %}
     {% endfor %}
     <br>
-    Completed Tickets:
+    <hr>
+    <h4>Completed Tickets:</h4>
     {% for ticket in ticket_completed %}
     {% if my_user == my_user %}
-    <h4><a href='/ticket/{{ticket.id}}'>{{ticket.title}}</a></h4>
+    <a class='btn btn-success btn-sm' href='/ticket/{{ticket.id}}'>{{ticket.title}}</a>
     {% endif %}
     {% endfor %}
 </ul>

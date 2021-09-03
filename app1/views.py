@@ -7,6 +7,7 @@ from bugtracker.settings import AUTH_USER_MODEL
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django import forms
+from django.contrib import messages
 
 # Create your views here.
 def add_user(request):
@@ -15,7 +16,7 @@ def add_user(request):
         if form.is_valid():
             data = form.cleaned_data
             my_user1 = MyUser.objects.create_user(username=data['username'], password=data['password'])
-            # login(request, my_user1)
+            messages.success(request, 'User successfully created!', extra_tags='success')
             return HttpResponseRedirect(reverse('home'))
     form = AddUserForm()
     return render(request, 'generic_form.html', {'form': form})
@@ -28,6 +29,7 @@ def login_view(request):
             my_user = authenticate(request, username=data['username'], password=data['password'])
             if my_user:
                 login(request, my_user)
+                messages.success(request, 'User successfully logged in!', extra_tags='success')
                 return HttpResponseRedirect(reverse('home'))
 
     form = LoginForm()
@@ -35,4 +37,5 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
+    messages.success(request, 'User successfully logged out!', extra_tags='success')
     return HttpResponseRedirect(request.GET.get('next', reverse('home')))
