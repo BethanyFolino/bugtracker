@@ -16,7 +16,7 @@ def add_user(request):
         if form.is_valid():
             data = form.cleaned_data
             my_user1 = MyUser.objects.create_user(username=data['username'], password=data['password'])
-            login(request, my_user1)
+            # login(request, my_user1)
             return HttpResponseRedirect(reverse('home'))
     form = AddUserForm()
     return render(request, 'generic_form.html', {'form': form})

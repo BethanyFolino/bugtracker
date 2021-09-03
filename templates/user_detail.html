@@ -1,9 +1,25 @@
 {% include 'navbar.html' %}
 <hr>
-<h1>User</h1>
+<h1>{{my_user.username}}'s Profile</h1>
 <ul>
-    <h2><li>Username: {{my_user.username}}</li></h2>
-    <h2><li>Created tickets: {{my_user.created}}</li></h2>
-    <h2><li>Assigned tickets: {{my_user.assigned}}</li></h2>
-    <h2><li>Completed tickets: {{my_user.completed}}</li></h2>
+    Created Tickets:
+    {% for ticket in ticket_created %}
+    {% if my_user == my_user %}
+    <h4><a href='/ticket/{{ticket.id}}'>{{ticket.title}}</a></h4>
+    {% endif %}
+    {% endfor %}
+    <br>
+    Assigned Tickets:
+    {% for ticket in ticket_assigned %}
+    {% if my_user == my_user %}
+    <h4><a href='/ticket/{{ticket.id}}'>{{ticket.title}}</a></h4>
+    {% endif %}
+    {% endfor %}
+    <br>
+    Completed Tickets:
+    {% for ticket in ticket_finished %}
+    {% if my_user == my_user %}
+    <h4><a href='/ticket/{{ticket.id}}'>{{ticket.title}}</a></h4>
+    {% endif %}
+    {% endfor %}
 </ul>

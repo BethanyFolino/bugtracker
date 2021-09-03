@@ -5,4 +5,4 @@ from django.contrib.auth.models import AbstractUser
 class MyUser(AbstractUser):
     ...
     def __str__(self):
-        return self.name
+        return self.username

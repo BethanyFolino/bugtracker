@@ -4,7 +4,8 @@
 {% for ticket in tickets %}
 {% if ticket.status == 'New' %}
 Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
-Added by: <a href='/user/{{user.user_id}}/'>{{user.username}}</a>
+Added by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
+<br>
 {% endif %}
 {% endfor %}
 <hr>
@@ -12,8 +13,9 @@ Added by: <a href='/user/{{user.user_id}}/'>{{user.username}}</a>
 {% for ticket in tickets %}
 {% if ticket.status == 'In Progress' %}
 Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
-Added by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
-Assigned to: <a href='/user/{{user.id}}/'>{{user.username}}</a>
+Added by: <a href='/user/{{user.id}}/'>{{ticket.filed_by.username}}</a>
+Assigned to: <a href='/user/{{user.id}}/'>{{ticket.assigned_to.username}}</a>
+<br>
 {% endif %}
 {% endfor %}
 <hr>
@@ -21,9 +23,9 @@ Assigned to: <a href='/user/{{user.id}}/'>{{user.username}}</a>
 {% for ticket in tickets %}
 {% if ticket.status == 'Done' %}
 Title: <a href='/ticket/{{ticket.id}}/'> {{ticket.title}}</a>
-Added by: <a href='/user/{{user.id}}/'> {{user.username}}</a>
-Assigned to: <a href='/user/{{user.id}}/'>{{user.username}}</a>
-Completed by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
+Added by: <a href='/user/{{user.id}}/'> {{ticket.filed_by.username}}</a>
+Completed by: <a href='/user/{{user.id}}/'>{{ticket.completed_by.username}}</a>
+<br>
 {% endif %}
 {% endfor %}
 <hr>
@@ -31,6 +33,6 @@ Completed by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
 {% for ticket in tickets %}
 {% if ticket.status == 'Invalid' %}
 Title: <a href='/ticket/{{ticket.id}}/'>{{ticket.title}}</a>
-Added by: <a href='/user/{{user.id}}/'>{{user.username}}</a>
+Added by: <a href='/user/{{user.id}}/'>{{ticket.filed_by.username}}</a>
 {% endif %}
 {% endfor %}

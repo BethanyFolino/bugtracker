@@ -15,15 +15,20 @@ def homepage(request):
     tickets = Ticket.objects.all()
     return render(request, 'homepage.html', {'tickets': tickets})
 
+@login_required
 def ticket_detail(request, id):
     ticket = Ticket.objects.get(id=id)
     return render(request, 'ticket_detail.html', {'ticket': ticket})
 
+@login_required
 def user_detail(request, id):
     my_user = MyUser.objects.get(id=id)
-    ticket = Ticket.objects.filter(my_user=my_user)
-    return render(request, 'user_detail.html', {'my_user': my_user}, {'ticket': ticket})
+    ticket_created = Ticket.objects.filter(filed_by=my_user)
+    ticket_assigned = Ticket.objects.filter(assigned_to=my_user)
+    ticket_finished = Ticket.objects.filter(completed_by=my_user)
+    return render(request, 'user_detail.html', {'my_user': my_user, 'ticket_created': ticket_created, 'ticket_assigned': ticket_assigned, 'ticket_finished': ticket_finished})
 
+@login_required
 def add_ticket(request):
     if request.method == 'POST':
         form = AddTicketForm(request.POST)
@@ -31,12 +36,14 @@ def add_ticket(request):
             data = form.cleaned_data
             Ticket.objects.create(
                 title=data['title'],
+                filed_by=request.user,
                 description=data['description'],
             )
             return HttpResponseRedirect(reverse('home'))
     form = AddTicketForm()
     return render(request, 'generic_form.html', {'form': form})
 
+@login_required
 def edit_ticket(request, id):
     item = Ticket.objects.get(id=id)
 
@@ -55,28 +62,29 @@ def edit_ticket(request, id):
     })
     return render(request, 'generic_form.html', {'form': form})
 
-
+@login_required
 def assign_ticket(request, id):
     ticket = Ticket.objects.get(id=id)
-    my_user = MyUser.objects.get(id=id)
-    ticket.assigned_to = my_user.is_authenticated
+    ticket.assigned_to = request.user
     ticket.status = 'In Progress'
     ticket.save()
     return HttpResponseRedirect(reverse('ticketdetail', args=(id,)))
 
+@login_required
 def finish_ticket(request, id):
     ticket = Ticket.objects.get(id=id)
-    my_user = MyUser.objects.get(id=id)
-    ticket.completed_by = my_user.is_authenticated
+    ticket.completed_by = ticket.assigned_to
     ticket.status = 'Done'
-    ticket.assigned_to = 'None'
+    ticket.assigned_to = None
     ticket.save()
     return HttpResponseRedirect(reverse('ticketdetail', args=(id,)))
 
+@login_required
 def invalid_ticket(request, id):
     ticket = Ticket.objects.get(id=id)
     ticket.status = 'Invalid'
-    ticket.assigned_to = 'None'
+    ticket.assigned_to = None
+    ticket.completed_by = None
     ticket.save()
     return HttpResponseRedirect(reverse('ticketdetail', args=(id,)))
 
