@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from app1.views import login_view, logout_view, add_user
 from app2.views import homepage, user_detail, ticket_detail, add_ticket, edit_ticket, assign_ticket, complete_ticket, invalid_ticket
+from django.views.static import serve
+from django.conf.urls import url
 
 urlpatterns = [
     path('user/<int:id>/', user_detail, name='userdetail'),
@@ -30,5 +32,8 @@ urlpatterns = [
     path('', homepage, name='home'),
     path('admin/', admin.site.urls),
     path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout')
+    path('logout/', logout_view, name='logout'),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STAIC_ROOT}),
 ]
+urlpatterns=urlpatterns+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
