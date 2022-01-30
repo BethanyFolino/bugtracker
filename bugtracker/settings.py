@@ -18,7 +18,7 @@ import environ
 environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -129,7 +129,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
     BASE_DIR/'static'
@@ -148,3 +149,5 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.ERROR: 'alert-danger',
 }
+
+django_heroku.settings(locals())
