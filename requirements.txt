@@ -6,6 +6,7 @@ click==8.0.3
 colorama==0.4.4
 distlib==0.3.4
 Django==3.2.7
+django-environ==0.8.1
 django-multiselectfield==0.1.12
 djangorestframework==3.13.1
 filelock==3.4.0
