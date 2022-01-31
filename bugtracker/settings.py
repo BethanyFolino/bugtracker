@@ -15,6 +15,7 @@ from django.contrib.messages import constants as messages
 import os
 import dotenv
 import django_heroku
+import dj_database_url
 import environ
 environ.Env.read_env()
 
