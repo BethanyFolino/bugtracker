@@ -27,9 +27,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Secret Key is protected
-# dotenv_file = os.path.join(BASE_DIR, '.env')
-# if os.path.isfile(dotenv_file):
-#     dotenv.load_dotenv(dotenv_file)
+dotenv_file = os.path.join(BASE_DIR, '.env')
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -86,12 +87,8 @@ WSGI_APPLICATION = 'bugtracker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': [ os.path.join(BASE_DIR, 'db.sqlite3'),],
-    }
-}
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
 # Password validation
@@ -137,6 +134,8 @@ STATICFILES_DIRS = [
     [ os.path.join(BASE_DIR, 'static'),]
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -151,4 +150,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+# Added for Heroku deployment
 django_heroku.settings(locals())
+
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
