@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from django.contrib.messages import constants as messages
 import os
-# import dotenv
+import dotenv
 import django_heroku
 import environ
 environ.Env.read_env()
